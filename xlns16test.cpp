@@ -438,7 +438,7 @@ void testcompare()
 int main(void)
 {
 	char ch;
-	printf("xlns1616ov2025 C++ (16-bit like bfloat) %ld\n",sizeof(xlns16));
+	printf("xlns16 C++ (16-bit like bfloat) %ld\n",sizeof(xlns16));
 
 	testcompare();
 	test5fp();
