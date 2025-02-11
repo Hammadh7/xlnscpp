@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+//uncomment for ideal sb and db:
+//#define xlns32_ideal
 #include "xlns32.cpp"
 
 void test1fp()
