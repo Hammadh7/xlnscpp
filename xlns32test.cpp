@@ -1,3 +1,4 @@
+//some numeric tests of xlns32.cpp; see github.com/xlnsresearch/xlns/examples for a similar python test
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
