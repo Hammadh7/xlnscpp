@@ -197,13 +197,13 @@ class xlns16_float {
     friend xlns16_float operator*=(xlns16_float &, float);
     friend xlns16_float operator/=(xlns16_float &, xlns16_float);
     friend xlns16_float operator/=(xlns16_float &, float);
-//    friend xlns16_float sin(xlns16_float);
-//    friend xlns16_float cos(xlns16_float);
-//    friend xlns16_float exp(xlns16_float);
-//    friend xlns16_float log(xlns16_float);
-//    friend xlns16_float atan(xlns16_float);
-//    friend xlns16_float abs(xlns16_float);
-//    friend xlns16_float sqrt(xlns16_float);
+    friend xlns16_float sin(xlns16_float);
+    friend xlns16_float cos(xlns16_float);
+    friend xlns16_float exp(xlns16_float);
+    friend xlns16_float log(xlns16_float);
+    friend xlns16_float atan(xlns16_float);
+    friend xlns16_float abs(xlns16_float);
+    friend xlns16_float sqrt(xlns16_float);
 //    friend xlns16_float operator-(xlns16_float);
     friend int operator==(xlns16_float arg1, xlns16_float arg2)
       {
@@ -445,4 +445,51 @@ xlns16_float xlns16_float::operator=(float rvalue) {
 }
 
 
+
+// functions computed ideally by convert to/from FP
+
+
+inline xlns16_float sin(xlns16_float x)
+{ 
+	return float2xlns16_(sin(xlns16_2float(x))); 
+}
+
+inline xlns16_float cos(xlns16_float x)
+{ 
+	return float2xlns16_(cos(xlns16_2float(x))); 
+}
+
+// exp and log can be implemented more efficiently in LNS but 
+// this is just cookie cutter ideal implementation at present
+
+inline xlns16_float exp(xlns16_float x)
+{ 
+	return float2xlns16_(exp(xlns16_2float(x))); 
+}
+
+inline xlns16_float log(xlns16_float x)
+{ 
+	return float2xlns16_(log(xlns16_2float(x))); 
+}
+
+inline xlns16_float atan(xlns16_float x)
+{ 
+	return float2xlns16_(atan(xlns16_2float(x))); 
+}
+
+// the following have efficient macro implementations
+
+inline xlns16_float sqrt(xlns16_float x)
+{ 
+	xlns16_float result;
+	result.x = xlns16_sqrt(x.x); 
+	return result; 
+}
+
+inline xlns16_float abs(xlns16_float x)
+{ 
+	xlns16_float result;
+	result.x = xlns16_abs(x.x); 
+	return result; 
+}
 
