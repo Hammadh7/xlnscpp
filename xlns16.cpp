@@ -87,7 +87,50 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
   {
 	return ((xlns16) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
   }
+#else
+  #define xlns16_sb xlns16_sb_premit
+  #define xlns16_db xlns16_db_ideal
+  #define F 7
+
+  #include <math.h>
+  inline xlns16 xlns16_db_ideal(xlns16 z)  //only for singularity
+  {
+	return ((xlns16) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
+  }
+  inline xlns16 xlns16_mitch(xlns16 z)
+  {
+     return (((1<<F)+(z&((1<<F)-1)))>>(-(z>>F)));
+  }
+
+  inline xlns16 xlns16_sb_premit_neg(xlns16_signed zi)   //was called premitchnpi(zi): assumes zi<=0
+  {
+    xlns16 postcond;
+    xlns16 z;
+    postcond = (zi <= -(3<<F))? 0: (zi >= -(3<<(F-2))? -1: +1);
+    z = ((zi<<3) + (zi^0xffff) + 16)>>3;
+    return (zi==0)?1<<F: xlns16_mitch(z) + postcond;
+    //return ((zi==0)?1<<F: (((1<<F)+(z&((1<<F)-1)))>>(-(z>>F)))+postcond );
+  }
+
+  inline xlns16 xlns16_db_premit_neg(xlns16_signed z)   //assumes zi<0
+  {
+    xlns16 precond;
+    precond = (z < -(2<<F))?
+                    5<<(F-3):                //  0.625
+                    (z >> 2) + (9 << (F-3));//  .25*zr + 9/8
+    return (-z >= 1<<F)?-xlns16_mitch(z+precond): xlns16_db_ideal(z); // use ideal for singularity
+  }
+  inline xlns16 xlns16_sb_premit(xlns16_signed zi)   //assumes zi>=0
+  {
+    return xlns16_sb_premit_neg(-zi)+zi;
+  }
+  inline xlns16 xlns16_db_premit(xlns16_signed z)   //assumes zi>0
+  {
+    return xlns16_db_premit_neg(-z)+z;
+  } 
 #endif
+
+
 
 
 //++++ X-X ERROR fixed

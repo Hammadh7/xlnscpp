@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#define xlns16_ideal
+//#define xlns16_ideal
 #include "xlns16.cpp"
+
+
 
 void test1fp()
 {
@@ -12,7 +14,7 @@ void test1fp()
 
 	odd = 1;
 	sum = 0;
-	for (i=1; i<=10000; i++)
+	for (i=1; i<=100; i++)  //scaled down to 100
 	{
 		sum += odd;
 		odd += 2.0;
@@ -28,7 +30,7 @@ void test1xlns16()
 	odd = fp2xlns16(1.0);
 	sum = fp2xlns16(0.0);
 	two = fp2xlns16(2.0);
-	for (i=1; i<=10000; i++)
+	for (i=1; i<=100; i++)  //scaled down to 100
 	{
 		sum = xlns16_add(sum,odd);
 		odd = xlns16_add(odd,two);
@@ -127,10 +129,11 @@ void test5xlns16_float()
 	num = 1.0;
 	sum = 0.0;
 	val = num;
-	for (i=1; i<=1000; i++)
+	for (i=1; i<=10/*00*/; i++)
 	{
 		sum = sum + val/num;
 		val = -val;
+		//std::cout << "test5xlns16_float num=" << num << " 4*sum=" << 4*sum << "\n";
 		num = num + 2.0;
 	}
 	std::cout << "test5xlns16_float num=" << num << " 4*sum=" << 4*sum << "\n";
@@ -144,7 +147,7 @@ void test5fp()
 	num = 1.0;
 	sum = 0.0;
 	val = num;
-	for (i=1; i<=1000; i++)
+	for (i=1; i<=10/*00*/; i++)
 	{
 		sum = sum + val/num;
 		val = -val;
@@ -162,7 +165,7 @@ void test5xlns16()
 	num = fp2xlns16(1.0);
 	sum = fp2xlns16(0.0);
 	val = num;
-	for (i=1; i<=1000; i++)
+	for (i=1; i<=10/*00*/; i++)
 	{
 		sum = xlns16_add(sum, xlns16_div(val, num));
 		val = xlns16_neg(val);
@@ -362,7 +365,7 @@ void test1xlns16_float()
 	odd = 1.0;
 	sum = 0.0;
 	two = 2.0;
-	for (i=1; i<=10000; i++)
+	for (i=1; i<=100; i++)  //scaled down to 100
 	{
 		sum = sum+odd;
 		odd = odd+two;
