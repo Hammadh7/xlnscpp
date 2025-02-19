@@ -79,11 +79,11 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
   #define xlns16_sb xlns16_sb_ideal
   #define xlns16_db xlns16_db_ideal
   #include <math.h>
-  inline xlns16 xlns16_sb_ideal(xlns16 z)
+  inline xlns16 xlns16_sb_ideal(xlns16_signed z)
   {
 	return ((xlns16) ((log(1+ pow(2.0, ((float) z) / xlns16_scale) )/log(2.0))*xlns16_scale+.5));
   }
-  inline xlns16 xlns16_db_ideal(xlns16 z)
+  inline xlns16 xlns16_db_ideal(xlns16_signed z)
   {
 	return ((xlns16) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
   }
@@ -93,7 +93,7 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
   #define F 7
 
   #include <math.h>
-  inline xlns16 xlns16_db_ideal(xlns16 z)  //only for singularity
+  inline xlns16 xlns16_db_ideal(xlns16_signed z)  //only for singularity
   {
 	return ((xlns16) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
   }
