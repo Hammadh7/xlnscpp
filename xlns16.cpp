@@ -89,7 +89,7 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
   }
 #else
   #define xlns16_sb xlns16_sb_premit
-  #define xlns16_db xlns16_db_ideal
+  #define xlns16_db xlns16_db_premit
   #define F 7
 
   #include <math.h>
@@ -114,7 +114,7 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
 
   inline xlns16 xlns16_db_premit_neg(xlns16_signed z)   //assumes zi<0
   {
-    xlns16 precond;
+    xlns16_signed precond;
     precond = (z < -(2<<F))?
                     5<<(F-3):                //  0.625
                     (z >> 2) + (9 << (F-3));//  .25*zr + 9/8
