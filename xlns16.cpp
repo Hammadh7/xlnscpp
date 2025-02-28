@@ -95,7 +95,7 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
   #include <math.h>
   inline xlns16 xlns16_db_ideal(xlns16_signed z)  //only for singularity
   {
-	return ((xlns16) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
+	return ((xlns16_signed) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
   }
   inline xlns16 xlns16_mitch(xlns16 z)
   {
@@ -118,7 +118,7 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
     precond = (z < -(2<<F))?
                     5<<(F-3):                //  0.625
                     (z >> 2) + (9 << (F-3));//  .25*zr + 9/8
-    return (-z >= 1<<F)?-xlns16_mitch(z+precond): xlns16_db_ideal(z); // use ideal for singularity
+    return (-z >= 1<<F)?-xlns16_mitch(z+precond): xlns16_db_ideal(-z)+z; // use ideal for singularity
   }
   inline xlns16 xlns16_sb_premit(xlns16_signed zi)   //assumes zi>=0
   {
