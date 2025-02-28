@@ -85,7 +85,7 @@ inline xlns16 xlns16_div(xlns16 x, xlns16 y)
   }
   inline xlns16 xlns16_db_ideal(xlns16_signed z)
   {
-	return ((xlns16) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
+	return ((xlns16_signed) ((log( pow(2.0, ((float) z) / xlns16_scale) - 1 )/log(2.0))*xlns16_scale+.5));
   }
 #else
   #define xlns16_sb xlns16_sb_premit
