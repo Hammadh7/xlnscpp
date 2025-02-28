@@ -101,7 +101,7 @@ inline xlns32 xlns32_div(xlns32 x, xlns32 y)
   }
   inline xlns32 xlns32_db_ideal(xlns32 z)
   {
-	return ((xlns32) ((log( pow(2.0, ((float) z) / xlns32_scale) - 1 )/log(2.0))*xlns32_scale+.5));
+	return ((xlns32_signed) ((log( pow(2.0, ((float) z) / xlns32_scale) - 1 )/log(2.0))*xlns32_scale+.5));
   }
 #else
   #define xlns32_sb xlns32_sb_macro
