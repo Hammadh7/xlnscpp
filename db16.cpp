@@ -5,6 +5,8 @@
 #define xlns16_ideal
 #include "xlns16.cpp"
 
+using namespace std;
+
 //called by sblptest.py
 int main(int argc, char ** argv)
 {
@@ -13,13 +15,13 @@ int main(int argc, char ** argv)
 	one =fp2xlns16(-1.0);
 	if (argc < 2)
 	{
-		std::cout << "db16 <int>; computes Gaussian Log for 16-bit LNS\n";
+		cout << "db16 <int>; computes Gaussian Log for 16-bit LNS\n";
 		return 1;
 	}
 
 	zi = atoi(argv[1]);
 	z = ((xlns16) ((zi & 0x7fff)^0x4000));
 	res = xlns16_add( z , one );
-	std::cout << ((xlns16_signed)(0x4000^res)) <<"\n";
+	cout << ((xlns16_signed)(0x4000^res)) <<"\n";
 	return 0;
 }	

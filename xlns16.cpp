@@ -22,9 +22,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdint>  // Add this include for uint16_t and int16_t
   //typedef unsigned short xlns16;
   //typedef signed short xlns16_signed;
-  typedef u_int16_t xlns16;
+  typedef uint16_t xlns16;
   typedef int16_t xlns16_signed;
   #define xlns16_zero          0x0000
   #define xlns16_scale         0x0080
@@ -213,7 +214,19 @@ float xlns162fp(xlns16 x)
 
 class xlns16_float {
     xlns16 x;
- public:
+public:
+    xlns16_float() : x(xlns16_zero) {}
+    xlns16_float(float r) {
+        *this = r;  // Calls operator=(float) to perform conversion.
+    }
+   //  xlns16_float(int r) {
+   //      *this = static_cast<float>(r);  // Conversion via operator=(float).
+   //  }
+   //  xlns16_float& operator=(float rvalue) {
+   //      x = float2xlns16_(rvalue).x;
+   //      return *this;
+   //  }
+
     friend xlns16_float operator+(xlns16_float , xlns16_float );
     friend xlns16_float operator+(float, xlns16_float );
     friend xlns16_float operator+(xlns16_float , float);
@@ -226,6 +239,8 @@ class xlns16_float {
     friend xlns16_float operator/(xlns16_float , xlns16_float );
     friend xlns16_float operator/(float, xlns16_float );
     friend xlns16_float operator/(xlns16_float , float);
+    friend xlns16 xlns16_internal(xlns16_float );
+    friend float xlns16_2float(xlns16_float );
     xlns16_float operator=(float);
     friend xlns16 xlns16_internal(xlns16_float );
     friend float xlns16_2float(xlns16_float );

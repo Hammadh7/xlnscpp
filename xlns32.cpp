@@ -280,6 +280,18 @@ float xlns322fp(xlns32 x)
 class xlns32_float {
     xlns32 x;
  public:
+  xlns32_float() {
+      x = xlns32_zero;
+   }
+   xlns32_float(float r) {
+      *this = r; 
+  }
+
+   
+ xlns32_float(int r) {
+   *this = static_cast<float>(r);  
+}
+
     friend xlns32_float operator+(xlns32_float , xlns32_float );
     friend xlns32_float operator+(float, xlns32_float );
     friend xlns32_float operator+(xlns32_float , float);
